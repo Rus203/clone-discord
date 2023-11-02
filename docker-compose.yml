@@ -1,0 +1,32 @@
+services:
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: ./
+  #     dockerfile: ./dockerfile
+  #   volumes:
+  #     - .:/discord_app
+  #   command: yarn dev
+  #   env_file: ./.env
+  #   ports: 
+  #     - ${APP_PORT}:3000
+  #   depends_on:
+  #     - database
+
+  database:
+    image: mysql:8
+    container_name: mysql_database
+    volumes:
+      - mysql_data:/data/db
+    env_file: ./.env
+    environment:
+      - ${MYSQL_ROOT_PASSWORD}
+      - ${MYSQL_DATABASE}
+      - ${MYSQL_USER}
+      - ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:3306
+  
+volumes:
+  mysql_data:
+  discord_app:
